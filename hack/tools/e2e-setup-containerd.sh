@@ -36,11 +36,4 @@ else
     | tar -C "${CONTAINERD_INSTALL_DIR}/" -zxvf - --strip-components=1
 fi
 
-# generate config for current user
-cat <<EOF >"${CONTAINERD_INSTALL_DIR}"/containerd-config.toml
-# own socket as as current user.
-# we will be running as this user and only fetching
-[grpc]
-  uid = $(id -u)
-  gid = $(id -g)
-EOF
+# config is generated at test runtime to allow per-instance NRI socket paths
